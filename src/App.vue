@@ -27,8 +27,8 @@
 <style>
   @charset 'utf-8';
 
-  @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
-
+  @import url('https://fonts.googleapis.com/css2?family=Aboreto&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+  
   * {
     margin: 0;
     padding: 0;
@@ -57,6 +57,23 @@
 
   body {
     font-family: 'Kalam', cursivem, 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.64;
+    color: #000;
+    background-color: #f6f6f6;
+  }
+
+  .shadow {
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .wrap {
+    position: relative;
+    display: block;
+    width: 90%;
+    margin: 0 auto;
   }
 
   </style>

@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <header class="header">
         <h1>Header</h1>
-    </div>
+    </header>
 </template>
 
 <script>
@@ -10,6 +10,9 @@
     }
 </script>
 
-<style>
-
+<style scoped>
+header {
+    text-align: center;
+    font-weight: 700;
+}
 </style>
