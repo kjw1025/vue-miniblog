@@ -1,7 +1,6 @@
 <template>
     <div class="input-wrap shadow">
         <input type="text" v-model="newItem" class="input-box" maxlength="30" @keyup.enter="addItem">
-        <!-- <button v-on:click="addItem">추가</button> -->
         <span @click="addItem" class="add-bt">
             <i class="fas fa-plus add-bt-icon"></i>
         </span>
@@ -66,7 +65,7 @@
     }
 
     .input-box {
-        width: 70%;
+        width: calc(100% - 150px);
         font-size: 16px;
         margin-left: 20px;
     }
