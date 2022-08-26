@@ -1,6 +1,6 @@
 <template>
     <header class="header">
-        <h1>Header</h1>
+        <h1>Memo</h1>
     </header>
 </template>
 
@@ -14,5 +14,6 @@
 header {
     text-align: center;
     font-weight: 700;
+    margin-top: 100px;
 }
 </style>

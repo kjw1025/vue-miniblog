@@ -3,8 +3,11 @@
         <ul>
             <!-- v-for in :key -->
             <li v-for="(item, index) in memoItemArr" :key="index" class="shadow">
-                {{item}}
-                <span class="remove-bt" @click="removeMemo(item, index)">
+
+                <i class="fas fa-check-circle check-bt" @click="updateMemo(item)" :class="{memoComplete:item.complete}"></i>
+
+                <span :class="{memoCompleteTxt:item.complete}">{{item.memotitle}}</span>
+                <span class="remove-bt" @click="removeMemo(item.id, index)">
                     <i class="fas fa-minus"></i>
                 </span>
             </li>
@@ -13,11 +16,13 @@
 </template>
 
 <script>
-import {ref, reactive} from 'vue';
+    import {
+        ref,
+        reactive
+    } from 'vue';
 
     export default {
         setup() {
-            console.log(localStorage);
 
             const total = ref(0);
             total.value = localStorage.length;
@@ -25,10 +30,13 @@ import {ref, reactive} from 'vue';
 
             const memoItemArr = reactive([]);
 
-            if( total.value > 0 ) {
-                for(let i = 0; i < total.value; i++) {
-                    memoItemArr.push(localStorage.key(i));
+            if (total.value > 0) {
+                for (let i = 0; i < total.value; i++) {
+                    //추후 실제 DB 연동 예정
+                    let obj = localStorage.getItem(localStorage.key(i));
+                    memoItemArr.push(JSON.parse(obj));
                 }
+                memoItemArr.sort();
             }
 
             const removeMemo = (item, index) => {
@@ -36,9 +44,19 @@ import {ref, reactive} from 'vue';
                 memoItemArr.splice(index, 1);
             }
 
+            const updateMemo = (item) => {
+                // 찾아서 지우고 다시 set 한다.
+                localStorage.removeItem(item.id);
+                // 변경한다
+                item.complete = !item.complete;
+                // set
+                localStorage.setItem(item.id, JSON.stringify(item));
+            }
+
             return {
                 memoItemArr,
-                removeMemo
+                removeMemo,
+                updateMemo
             }
         }
     }
@@ -70,4 +88,18 @@ import {ref, reactive} from 'vue';
         height: 100%;
     }
 
+    .check-bt {
+        color: #62acde;
+        line-height: 50px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .memoComplete {
+        color: #b3adad;
+    }
+    .memoCompleteTxt {
+        color: #b3adad;
+        text-decoration: line-through;
+    }
 </style>
