@@ -7,12 +7,11 @@
 
 <script>
     export default {
-        setup() {
+        setup(props, context) {
             const clearAllMemo = () => {
-                localStorage.clear();
-                
-            }
 
+                context.emit('deleteitem')
+            }
             return {
                 clearAllMemo
             }
@@ -32,6 +31,7 @@
         margin: 0 auto;
         border-radius: 5px;
     }
+
     .clear-all-bt {
         display: inline-block;
         width: 80%;
@@ -41,6 +41,7 @@
         border-radius: 5px;
         margin: 10px;
     }
+
     .copy {
         display: block;
         font-size: 9px;
