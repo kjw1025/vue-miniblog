@@ -2,7 +2,7 @@
     <div class="input-wrap shadow">
         <input type="text" v-model="newItem" class="input-box" maxlength="30" @keyup.enter="addItem">
 
-        <div class="option">
+        
             <span @click="addIcon(0)" class="img1">
                 이미지1
             </span>
@@ -13,7 +13,7 @@
             <span @click="addItem" class="add-bt">
                 <i class="fas fa-plus add-bt-icon"></i>
             </span>
-        </div>
+        
         <!-- 안내창 -->
         <ModalView v-bind:show="showModal" v-on:closemodal="showModal=false">
             <template #header>
@@ -31,16 +31,21 @@
     import {
         ref
     } from 'vue';
+    import { useStore } from 'vuex';
+
     import ModalView from '@/components/common/ModalVue.vue'
     export default {
         components: {
             ModalView
         },
-        setup(props, context) {
+        setup() {
+
+            const store = useStore();
 
             const newItem = ref('');
             const newIcon = ref(0);
             const showModal = ref(false);
+            
             const addItem = () => {
                 let temp = newItem.value;
                 let icon = newIcon.value;
@@ -49,7 +54,9 @@
                 // 추후 업데이트 예정(정규표현식-문자열체크 문법)
                 //  앞자리공백   공백    뒷자리공백
                 if (temp !== '') {
-                    context.emit("additem", temp, icon);
+                    // context.emit("additem", temp, icon);
+                    store.commit('ADD_MEMO', {item:temp, index:icon});
+
                     resetItem();
                 } else {
                     showModal.value = true;
