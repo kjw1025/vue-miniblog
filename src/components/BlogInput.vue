@@ -2,17 +2,28 @@
     <div class="input-wrap shadow">
         <input type="text" v-model="newItem" class="input-box" maxlength="30" @keyup.enter="addItem">
 
-        <span @click="addIcon(0)" class="img1">
-            이미지1
-        </span>
-        <span @click="addIcon(1)" class="img2">
-            이미지2
-        </span>
+        <div class="option">
+            <span @click="addIcon(0)" class="img1">
+                이미지1
+            </span>
+            <span @click="addIcon(1)" class="img2">
+                이미지2
+            </span>
 
+            <span @click="addItem" class="add-bt">
+                <i class="fas fa-plus add-bt-icon"></i>
+            </span>
+        </div>
+        <!-- 안내창 -->
+        <ModalView v-bind:show="showModal" v-on:closemodal="showModal=false">
+            <template #header>
+                <h3>안내창</h3>
+            </template>
+            <template #body>
+                <h2>내용을 작성하여주세요.</h2>
+            </template>
+        </ModalView>
 
-        <span @click="addItem" class="add-bt">
-            <i class="fas fa-plus add-bt-icon"></i>
-        </span>
     </div>
 </template>
 
@@ -20,10 +31,16 @@
     import {
         ref
     } from 'vue';
+    import ModalView from '@/components/common/ModalVue.vue'
     export default {
+        components: {
+            ModalView
+        },
         setup(props, context) {
+
             const newItem = ref('');
             const newIcon = ref(0);
+            const showModal = ref(false);
             const addItem = () => {
                 let temp = newItem.value;
                 let icon = newIcon.value;
@@ -34,6 +51,8 @@
                 if (temp !== '') {
                     context.emit("additem", temp, icon);
                     resetItem();
+                } else {
+                    showModal.value = true;
                 }
             }
             // 내용 재설정
@@ -43,10 +62,12 @@
             const addIcon = (index) => {
                 newIcon.value = index;
             }
+
             return {
                 newItem,
                 addItem,
-                addIcon
+                addIcon,
+                showModal
             }
         }
     }
