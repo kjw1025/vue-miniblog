@@ -1,6 +1,7 @@
 <template>
     <div class="list-wrap">
-        <ul>
+        <TransitionGroup name="list" tag="ul">
+            <!-- <ul> -->
             <!-- v-for in :key -->
             <li v-for="(item, index) in memodata" :key="index" class="shadow">
 
@@ -19,7 +20,8 @@
                 </div>
 
             </li>
-        </ul>
+            <!-- </ul> -->
+        </TransitionGroup>
     </div>
 </template>
 
@@ -107,5 +109,17 @@
     .memoCompleteTxt {
         color: #b3adad;
         text-decoration: line-through;
+    }
+
+    /* 애니메이션 */
+    .list-enter-active,
+    .list-leave-active {
+        transition: all 0.5s ease;
+    }
+
+    .list-enter-from,
+    .list-leave-to {
+        opacity: 0;
+        transform: translateX(30px);
     }
 </style>
