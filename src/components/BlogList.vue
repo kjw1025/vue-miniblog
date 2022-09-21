@@ -5,14 +5,12 @@
             <!-- v-for in :key -->
             <li v-for="(item, index) in items" :key="index" class="shadow">
 
-                <i class="fas fa-check-circle check-bt" @click="updateMemo(item, index)"
-                    :class="{memoComplete:item.complete}"></i>
+                <i class="fas fa-check-circle check-bt" @click="updateMemo(item, index)" :class="{memoComplete:item.complete}"></i>
 
                 <span :class="{memoCompleteTxt:item.complete}">{{item.memotitle}}</span>
 
                 <div class="info">
-                    <span class="icon"
-                        :style="{backgroundImage:'url(' + require(`@/assets/images/${item.memoicon}`) + ')'}"></span>
+                    <span class="icon" :style="{backgroundImage:'url(' + require(`@/assets/images/${item.memoicon}`) + ')'}"></span>
                     <span class="date">{{item.memodate}}</span>
                     <span class="remove-bt" @click="removeMemo(item.id, index)">
                         <i class="fas fa-minus"></i>
@@ -27,20 +25,21 @@
 
 <script>
     import { useStore } from 'vuex';
-    import { ref } from 'vue';
+    import { computed } from 'vue';
 
     export default {
         setup() {
 
             // vuex store 사용
             const store = useStore();
-            const items = ref([]);
-            items.value = store.state.memoItemArr;
+            store.dispatch('fetchReadMemo');
+            const items = computed(() => store.getters.getMemoArr);
+            // items.value = store.state.memoItemArr;
 
-            const removeMemo = (item, index) => {
+            const removeMemo = (id, index) => {
                 // context.emit('removeitem', item, index);
                 // store.commit('DELETE_MEMO', {item, index});
-                store.dispatch('fetchDeleteMemo',{item, index});
+                store.dispatch('fetchDeleteMemo',{id, index});
             }
             const updateMemo = (item, index) => {
                 // context.emit("updateitem", item, index);
@@ -60,53 +59,49 @@
 
 <style scoped>
     li {
-        position: relative;
-        display: flex;
-        min-height: 50px;
-        line-height: 50px;
-        margin: 10px 0;
-        background-color: #fff;
-        border-radius: 5px;
-        padding: 0 10px;
-        overflow: hidden;
+    display: flex;
+    min-height: 50px;
+    line-height: 50px;
+    margin: 10px 0;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 0 0 0 20px;
+
+    overflow: hidden;
     }
 
     .info {
         margin-left: auto;
     }
-
     .icon {
         display: inline-block;
         width: 40px;
         height: 40px;
         margin-right: 10px;
         background-size: cover;
-
+        background-repeat: no-repeat;
+        background-position: center;  
     }
-
-    .date {
-        font-family: 'Noto Sans KR';
-        margin-right: 60px;
-    }
-
     .remove-bt {
-        cursor: pointer;
-        position: absolute;
-        top: 0;
-        right: 0;
-        background-color: skyblue;
-
-        color: #fff;
-        text-align: center;
-        width: 50px;
+        position: relative;
+        display: block;
+        width: 60px;
         height: 100%;
-    }
+        float: right;
 
-    .remove-bt>i {
+        background-color: #62acde;
+        cursor: pointer;
+        margin-left: 10px;
+        text-align: center;
+    }
+    .remove-bt i {
+        font-size: 18px;
+        line-height: 55px;
+        color: #fff;
+
         transition: all 0.5s;
     }
-
-    .remove-bt:hover>i {
+    .remove-bt:hover i {
         transform: rotate(180deg);
     }
 
@@ -125,13 +120,11 @@
         color: #b3adad;
         text-decoration: line-through;
     }
-
     /* 애니메이션 */
     .list-enter-active,
     .list-leave-active {
         transition: all 0.5s ease;
     }
-
     .list-enter-from,
     .list-leave-to {
         opacity: 0;

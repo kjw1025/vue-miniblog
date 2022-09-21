@@ -2,7 +2,7 @@
     <div class="intro-wrap" @click="closeIntro">
         <h1>My Memo</h1>
         <div class="intro-cont">
-            <img :src="require('@/assets/images/dog_1.png')" />
+            <img :src="require('@/assets/images/dog1.png')" />
         </div>
     </div>
 </template>

@@ -113,7 +113,7 @@
         height: 50px;
         font-size: 0;
         cursor: pointer;
-        background: url('@/assets/images/dog_1.png') no-repeat center;
+        background: url('@/assets/images/dog1.png') no-repeat center;
         background-size: cover;
     }
 
@@ -123,7 +123,7 @@
         height: 50px;
         font-size: 0;
         cursor: pointer;
-        background: url('@/assets/images/dog_2.png') no-repeat center;
+        background: url('@/assets/images/dog2.png') no-repeat center;
         background-size: cover;
     }
 

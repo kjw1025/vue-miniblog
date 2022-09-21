@@ -5,15 +5,22 @@
 </template>
 
 <script>
-    import {ref} from 'vue';
+    import { ref} from 'vue';
     import {useStore} from 'vuex';
 
 
     export default {
         setup() {
-            const title = ref('');
-            const store = useStore();
-            title.value = store.state.headerText
+
+
+                const title = ref('');
+                const store = useStore();
+                title.value = store.state.memoStore.headerText
+
+                console.log(title.value);
+        
+
+
 
             return {
                 title
