@@ -1,38 +1,35 @@
 <template>
-    <header class="header">
-        <h1>{{title}}</h1>
-    </header>
+  <header class="header">
+    <h1>{{ title }} 📚</h1>
+  </header>
 </template>
 
 <script>
-    import { ref} from 'vue';
-    import {useStore} from 'vuex';
+import { ref } from "vue";
+import { useStore } from "vuex";
 
+export default {
+  setup() {
+    const title = ref("");
+    const store = useStore();
+    title.value = store.state.memoStore.headerText;
 
-    export default {
-        setup() {
+    console.log(title.value);
 
-
-                const title = ref('');
-                const store = useStore();
-                title.value = store.state.memoStore.headerText
-
-                console.log(title.value);
-        
-
-
-
-            return {
-                title
-            }
-        }
-    }
+    return {
+      title,
+    };
+  },
+};
 </script>
 
 <style scoped>
 header {
-    text-align: center;
-    font-weight: 700;
-    margin-top: 100px;
+  text-align: center;
+  font-weight: 700;
+  margin-top: 100px;
+}
+h1 {
+  font-size: 50px;
 }
 </style>
