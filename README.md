@@ -1,24 +1,10 @@
-# minblog
+# Todo 앱 
 
-## Project setup
-```
-npm install
-```
+## 프로젝트
+php 와 vue 를 이용한 기본적인 ToDo앱 <br>
+기본적인 CRUD 적용
+#### 사용기술 : Vue, php, JavaScript, CSS
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+##### 라이브러리 : axios, Vuex,
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+<img src="https://user-images.githubusercontent.com/107607247/196373708-719815b0-889f-4f76-a7bb-2b45b2485bcf.png"  width="300">
